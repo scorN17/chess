@@ -1,0 +1,176 @@
+* {
+  position: relative;
+  font-size: 1em;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  background: #fff;
+  color: #26282b;
+  width: 100%;
+  height: 100%;
+  font-stretch: normal;
+  font-variant: normal;
+  line-height: normal;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  font-family: "PTSans", "Arial", sans-serif;
+  text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* article, aside, footer, header, hgroup, main, nav, section */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Intro", "PTSans", "Arial", sans-serif;
+  color: #26282b;
+  font-weight: bold;
+  font-style: normal;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+}
+
+h1 {
+  font-size: 330%;
+}
+
+h2 {
+  font-size: 280%;
+}
+
+h3 {
+  font-size: 230%;
+}
+
+h4 {
+  font-size: 190%;
+}
+
+h5 {
+  font-size: 160%;
+}
+
+h6 {
+  font-size: 140%;
+}
+
+.minitit h1 {
+  font-size: 290%;
+}
+
+.minitit h2 {
+  font-size: 240%;
+}
+
+.minitit h3 {
+  font-size: 190%;
+}
+
+.minitit h4 {
+  font-size: 150%;
+}
+
+.minitit h5 {
+  font-size: 120%;
+}
+
+.minitit h6 {
+  font-size: 110%;
+}
+
+input, textarea, select {
+  font: normal 14px "PTSans", "Arial", sans-serif;
+}
+
+button {
+  font: normal 14px "Intro", "PTSans", "Arial", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #2370d8;
+  line-height: 1em;
+  border-bottom: 1px solid rgba(35, 112, 216, 0.1);
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #1253ac;
+  border-color: #1253ac;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+img {
+  border: none;
+  line-height: 0;
+}
+
+.clr {
+  clear: both;
+  font-size: 0;
+  line-height: 0;
+  height: 0;
+}
+
+br {
+  clear: both;
+  font-size: 0;
+  line-height: 0;
+  height: 0;
+}
+
+.svgi {
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  fill: currentColor;
+  stroke: currentColor;
+  display: inline-block;
+}
+
+/* ------------------------------------------------------------------------------ */
+.font1 {
+  font-family: "Arial", sans-serif;
+}
+
+.font2 {
+  font-family: "PTSans", sans-serif;
+}
+
+.font2n {
+  font-family: "PTSansNarrow", sans-serif;
+}
+
+.font3 {
+  font-family: "Intro", sans-serif;
+}
+
+.rub {
+  color: #404347;
+  border-bottom: 1px solid #404347;
+  line-height: 4px;
+  width: .4em;
+  display: inline-block;
+}
+
+/* ------------------------------------------------------------------------------ */

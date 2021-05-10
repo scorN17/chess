@@ -1,0 +1,165 @@
+@charset "UTF-8"
+
+@import inc
+
+
+
+.allwrp
+	box-sizing: initial
+	width: $mcol_l_w + $board_w + 4px + $mcol_r_w + 40px + 40px
+	margin: auto
+	padding-left: 40px
+	padding-right: 40px
+
+
+.mcolswrp
+	display: flex
+	.mcol
+		flex: 0 0 auto
+		outline: 1px solid #ccc
+		&.mcol_c
+			flex-basis: $board_w + 4px
+			width: $board_w + 4px
+			outline: none
+		&.mcol_l
+			flex-basis: $mcol_l_w
+			width: $mcol_l_w
+			margin-right: 40px
+		&.mcol_r
+			flex-basis: $mcol_r_w
+			width: $mcol_r_w
+			margin-left: 40px
+
+
+.toppanelwrp
+	margin-bottom: 50px
+
+.toppanel
+	outline: 1px solid #ccc
+
+
+.botpanelwrp
+	margin-top: 50px
+
+.botpanel
+	outline: 1px solid #ccc
+
+	.ntcwrp
+		display: none
+		margin-top: 10px
+		&.er,
+		&.ok
+			display: block
+		&.er
+			color: #ce2d2d
+		&.ok
+			color: #26ca71
+
+
+
+.chessboardwrp
+	margin-top: 50px
+
+.chessboard
+	display: flex
+	flex-wrap: wrap
+	width: $board_w
+	height: $board_w
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px
+	border: 2px solid $purp
+	box-sizing: initial
+
+	&.pr
+		pointer-events: none
+		opacity: .5
+
+	.field
+		flex: 0 0 70px
+		position: relative
+		width: 70px
+		height: 70px
+
+		&.clr_1
+			background: #f9f8ff
+		&.clr_0
+			background: $purp
+
+		.figure
+			position: absolute
+			top: 3px
+			left: 3px
+			bottom: 3px
+			right: 3px
+			cursor: pointer
+			background-position: center center
+			background-repeat: no-repeat
+			background-size: 95%
+
+			&:hover,
+			&.sel
+				background-color: rgba(215,127,255,.5)
+
+			&.fgr_19
+				background-image: url('../img/fig/wk.png')
+			&.fgr_18
+				background-image: url('../img/fig/wq.png')
+			&.fgr_14
+				background-image: url('../img/fig/wb.png')
+			&.fgr_13
+				background-image: url('../img/fig/wn.png')
+			&.fgr_15
+				background-image: url('../img/fig/wr.png')
+			&.fgr_11
+				background-image: url('../img/fig/wp.png')
+			&.fgr_29
+				background-image: url('../img/fig/bk.png')
+			&.fgr_28
+				background-image: url('../img/fig/bq.png')
+			&.fgr_24
+				background-image: url('../img/fig/bb.png')
+			&.fgr_23
+				background-image: url('../img/fig/bn.png')
+			&.fgr_25
+				background-image: url('../img/fig/br.png')
+			&.fgr_21
+				background-image: url('../img/fig/bp.png')
+
+		.vv,
+		.hh
+			text-align: center
+			position: absolute
+			color: $purp_d
+			font-family: $font3
+		.vv
+			display: flex
+			align-items: center
+			left: -20px
+			top: 0
+			bottom: 0
+		.hh
+			left: 0
+			right: 0
+			bottom: -25px
+		.vv2,
+		.hh2
+			opacity: 0
+			transform: rotate(180deg)
+		.vv2
+			left: auto
+			right: -20px
+		.hh2
+			bottom: auto
+			top: -25px
+
+	&.myblack
+		transform: rotate(180deg)
+		.figure
+			transform: rotate(-180deg)
+		.vv,
+		.hh
+			opacity: 0
+		.vv2,
+		.hh2
+			opacity: 1
+
+		
