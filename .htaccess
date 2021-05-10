@@ -8,7 +8,7 @@ RewriteEngine On
 RewriteBase /
 
 RewriteCond %{HTTP_HOST} .
-RewriteCond %{HTTP_HOST} !^chess\.gavrishkin\.ru [NC]
-RewriteRule (.*) http://chess.gavrishkin.ru/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !^chess [NC]
+RewriteRule (.*) http://chess/$1 [R=301,L]
 
 # ---------------------------------------------------

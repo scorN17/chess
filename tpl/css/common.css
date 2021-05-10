@@ -91,6 +91,7 @@
   border: 2px solid #9794bd;
   -webkit-box-sizing: initial;
           box-sizing: initial;
+  opacity: .05;
 }
 
 .chessboard.pr {

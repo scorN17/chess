@@ -26,20 +26,14 @@ function posblmov($postn, $posf, $fgrc, $fgrt)
 {
 	$posbl = array();
 	if ($fgrt === 1) {
-		if ($fgrc == 1) {
-			if (
-				substr($posf,1,1) == 2
-				&& ! $game['postn'][($posf+1)]
-			) $posbl[] = array($posf+2);
+		if ($fgrc === 1) {
+			if (substr($posf,1,1) == 2) $posbl[] = array($posf+2);
 			$posbl[] = array($posf+1);
 			$posbl[] = array($posf+11,'hit');
 			$posbl[] = array($posf-9,'hit');
 		}
-		if ($fgrc == 2) {
-			if (
-				substr($posf,1,1) == 7
-				&& ! $game['postn'][($posf-1)]
-			) $posbl[] = array($posf-2);
+		if ($fgrc === 2) {
+			if (substr($posf,1,1) == 7) $posbl[] = array($posf-2);
 			$posbl[] = array($posf-1);
 			$posbl[] = array($posf-11,'hit');
 			$posbl[] = array($posf+9,'hit');
@@ -55,30 +49,22 @@ function posblmov($postn, $posf, $fgrc, $fgrt)
 		$posbl[] = array($posf+8);
 		$posbl[] = array($posf-8);
 	}
-	if ($fgrt === 9) {
-		$posbl[] = array($posf+1);
-		$posbl[] = array($posf-1);
-		$posbl[] = array($posf+11);
-		$posbl[] = array($posf-11);
-		$posbl[] = array($posf+10);
-		$posbl[] = array($posf-10);
-		$posbl[] = array($posf+9);
-		$posbl[] = array($posf-9);
-	}
-	if ($fgrt === 8 || $fgrt === 5) {
+	if ($fgrt === 5 || $fgrt === 8 || $fgrt === 9) {
 		for ($i=1;$i<=8;$i++) {
 			$posbl[] = array($posf+1);
 			$posbl[] = array($posf-1);
 			$posbl[] = array($posf+10);
 			$posbl[] = array($posf-10);
+			if ($fgrt === 9) break;
 		}
 	}
-	if ($fgrt === 8 || $fgrt === 4) {
+	if ($fgrt === 4 || $fgrt === 8 || $fgrt === 9) {
 		for ($i=1;$i<=8;$i++) {
 			$posbl[] = array($posf+9);
 			$posbl[] = array($posf-9);
 			$posbl[] = array($posf+11);
 			$posbl[] = array($posf-11);
+			if ($fgrt === 9) break;
 		}
 	}
 	foreach ($posbl AS $key => $pos) {
