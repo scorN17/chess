@@ -22,55 +22,64 @@ function transf($num, $tof)
 	return $res;
 }
 
-function posblmov($postn, $posf, $fgrc, $fgrt)
+function posblmov($game, $fgr, $pos)
 {
+	$vectrs = array(
+		1 => array(
+			1 => array(1,2,-9,11),
+			2 => array(-1,-2,9,-11),
+		),
+		3 => array(8,12,19,21, -8,-12,-19,-21),
+		4 => array(9,11, -9,-11),
+		5 => array(1,10, -1,-10),
+		8 => array(1,9,10,11, -1,-9,-10,-11),
+		9 => array(1,9,10,11, -1,-9,-10,-11),
+	);
+	$vectr = $vectrs[$fgr[1]];
+	if (is_array($vectr[1])) $vectr = $vectr[$fgr[0]];
 	$posbl = array();
-	if ($fgrt === 1) {
-		if ($fgrc === 1) {
-			if (substr($posf,1,1) == 2) $posbl[] = array($posf+2);
-			$posbl[] = array($posf+1);
-			$posbl[] = array($posf+11,'hit');
-			$posbl[] = array($posf-9,'hit');
+	foreach ($vectr AS $w) {
+		$abs_w = abs($w);
+		for ($o=1; $o<=8; $o++) {
+			$p = $pos[0]+($o*$w);
+
+			if ($p<11 || $p>88) break;
+			$h = intval(substr($p,0,1));
+			if ($h<1 || $h>8) break;
+			$v = intval(substr($p,1,1));
+			if ($v<1 || $v>8) break;
+
+			$posfgr = $game['postn'][$p];
+
+			if (in_array($fgr[1],array(3,4,5,8,9))) {
+				if ($posfgr[0] == $game['side']) break;
+				if ($posfgr[1] == 9) break;
+			}
+			if ($fgr[1] == 1) {
+				if ($abs_w == 1) {
+					if ($posfgr[1]) break;
+				} elseif ($abs_w == 2) {
+					if ($posfgr[1]) break;
+					if ($fgr[0] == 1 && $v != 4) break;
+					if ($fgr[0] == 2 && $v != 5) break;
+					$p_1 = $p+($w/2*(-1));
+					if ($game['postn'][$p_1][1]) break;
+				} else {
+					if ($posfgr[0] == $game['side']) break;
+					if ($posfgr[1] == 9) break;
+					//TODO взятие пешки на проходе
+				}
+			}
+
+			$posbl[] = $p;
+
+			if (in_array($fgr[1],array(4,5,8))) {
+				if ($posfgr[1]) break;
+			}
+
+			if (in_array($fgr[1],array(1,3,9))) break;
 		}
-		if ($fgrc === 2) {
-			if (substr($posf,1,1) == 7) $posbl[] = array($posf-2);
-			$posbl[] = array($posf-1);
-			$posbl[] = array($posf-11,'hit');
-			$posbl[] = array($posf+9,'hit');
-		}
 	}
-	if ($fgrt === 3) {
-		$posbl[] = array($posf+12);
-		$posbl[] = array($posf-12);
-		$posbl[] = array($posf+21);
-		$posbl[] = array($posf-21);
-		$posbl[] = array($posf+19);
-		$posbl[] = array($posf-19);
-		$posbl[] = array($posf+8);
-		$posbl[] = array($posf-8);
-	}
-	if ($fgrt === 5 || $fgrt === 8 || $fgrt === 9) {
-		for ($i=1;$i<=8;$i++) {
-			$posbl[] = array($posf+1);
-			$posbl[] = array($posf-1);
-			$posbl[] = array($posf+10);
-			$posbl[] = array($posf-10);
-			if ($fgrt === 9) break;
-		}
-	}
-	if ($fgrt === 4 || $fgrt === 8 || $fgrt === 9) {
-		for ($i=1;$i<=8;$i++) {
-			$posbl[] = array($posf+9);
-			$posbl[] = array($posf-9);
-			$posbl[] = array($posf+11);
-			$posbl[] = array($posf-11);
-			if ($fgrt === 9) break;
-		}
-	}
-	foreach ($posbl AS $key => $pos) {
-		$h = intval(substr($pos[0],0,1));
-		$v = intval(substr($pos[0],1,1));
-		if ($h < 1 || $h > 8 || $v < 1 || $v > 8) unset($posbl[$key]);
-	}
+	if ($pos[1]) return in_array($pos[1],$posbl);
 	return $posbl;
 }

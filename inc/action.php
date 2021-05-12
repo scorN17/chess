@@ -14,16 +14,14 @@ if ('step' == $a) {
 	$posf = intval($_GET['pf']);
 	$post = intval($_GET['pt']);
 
-	$fgr = $game['postn'][$posf] ? $game['postn'][$posf] : 0;
+	$fgr = $game['postn'][$posf] ? $game['postn'][$posf] : array(0,0);
 	if ( ! $fgr) exit('{"res":"er"}');
 	
-	$fgrc = $fgr>20?2:1;
-	$fgrt = $fgr-($fgr>20?20:10);
-
-	if ($game['side'] != $fgrc) exit('{"res":"er"}');
+	if ($game['side'] != $fgr[0]) exit('{"res":"er"}');
 	
-	$posbl = posblmov($game['postn'], $posf, $fgrc, $fgrt);
+	$posbl = posblmov($game,$fgr,array($posf,$post));
 
+	var_dump($posbl);
 	print_r($posbl);
 
 	exit();
@@ -55,7 +53,7 @@ if ('game' == $a) {
 if ('newgame' == $a) {
 
 	$mode = in_array($_POST['gm_mode'],array('simple')) ? $_POST['gm_mode'] : 'simple';
-	$side = $_POST['gm_side'] == 'b' ? 'b' : 'w';
+	$side = $_POST['gm_side'] == '2' ? '2' : '1';
 	
 	$postn = json_encode($starting_position);
 	$postn = $db->escape($postn);

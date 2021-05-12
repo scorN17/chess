@@ -22,8 +22,8 @@ include_once(DROOT.'/tpl/head.php');
 				<div class="frow">
 					<div class="lbl">Сторона</div>
 					<div class="inp"><select name="gm_side">
-						<option value="w">Белые</option>
-						<option value="b">Черные</option>
+						<option value="1">Белые</option>
+						<option value="2">Черные</option>
 					</select></div>
 				</div>
 				<div class="frow">
@@ -61,7 +61,7 @@ if ($res && $db->num_rows($res)) {
 
 <div class="chessboardwrp">
 
-	<div class="chessboard <?=($game['side']=='b' ? 'myblack' : '')?>">
+	<div class="chessboard <?=($game['side']=='2' ? 'myblack' : '')?>">
 <?php
 $num = 0;
 $clr = true;
@@ -73,16 +73,12 @@ for ($v=8; $v>=1; $v--) {
 		$hh = $h_simb[$h];
 		$pxy = $h.$v;
 
-		$fgr = $game['postn'][$pxy] ? $game['postn'][$pxy] : 0;
-		if ($fgr) {
-			$fgrc = $fgr>20?2:1;
-			$fgrt = $fgr-($fgr>20?20:10);
-		} else $fgrc = $fgrt = 0;
+		$fgr = $game['postn'][$pxy] ? $game['postn'][$pxy] : array(0,0);
 
-		$my = $game['side'] && $game['side']==$fgrc ? true : false;
+		$my = $game['side'] && $game['side']==$fgr[0] ? true : false;
 
 		$p .= '<div class="field clr_'.($clr?'1':'0').' pxy_'.$pxy.'" data-pxy="'.$pxy.'">';
-		$p .= '<div class="figure fgr_'.$fgr.' '.($my?'my':'').'" data-fgrt="'.$fgrt.'">&nbsp;</div>';
+		$p .= '<div class="figure fgr_'.$fgr[0].$fgr[1].' '.($my?'my':'').'" data-fgrt="'.$fgr[1].'">&nbsp;</div>';
 		if ($h == 1) $p .= '<span class="vv">'.$v.'</span>';
 		if ($h == 8) $p .= '<span class="vv vv2">'.$v.'</span>';
 		if ($v == 8) $p .= '<span class="hh hh2">'.$hh.'</span>';
