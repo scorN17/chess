@@ -55,7 +55,12 @@ if ('newgame' == $a) {
 	$mode = in_array($_POST['gm_mode'],array('simple')) ? $_POST['gm_mode'] : 'simple';
 	$side = $_POST['gm_side'] == '2' ? '2' : '1';
 	
-	$postn = json_encode($starting_position);
+	$postn = $starting_position;
+	foreach ($postn AS $pos => &$fgr) {
+		$h = intval(substr($pos,0,1));
+		$fgr['fh'] = $h;
+	}
+	$postn = json_encode($postn);
 	$postn = $db->escape($postn);
 
 	$res = $db->query("INSERT INTO game SET

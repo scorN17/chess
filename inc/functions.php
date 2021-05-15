@@ -53,7 +53,6 @@ function posblmov($game, $fgr, $pos)
 
 			if (in_array($fgr[1],array(3,4,5,8,9))) {
 				if ($posfgr[0] == $game['side']) break;
-				if ($posfgr[1] == 9) break;
 			}
 			if ($fgr[1] == 1) {
 				if ($abs_w == 1) {
@@ -66,7 +65,6 @@ function posblmov($game, $fgr, $pos)
 					if ($game['postn'][$p_1][1]) break;
 				} else {
 					if ($posfgr[0] == $game['side']) break;
-					if ($posfgr[1] == 9) break;
 					//TODO взятие пешки на проходе
 				}
 			}
@@ -80,6 +78,7 @@ function posblmov($game, $fgr, $pos)
 			if (in_array($fgr[1],array(1,3,9))) break;
 		}
 	}
+	//TODO добавить ходы типа рокировки
 	if ($pos[1]) return in_array($pos[1],$posbl);
 	return $posbl;
 }
