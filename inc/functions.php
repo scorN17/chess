@@ -22,8 +22,11 @@ function transf($num, $tof)
 	return $res;
 }
 
-function posblmov($game, $fgr, $pos)
+function posblmov($game, $side, $pos)
 {
+	$fgr = $game['postn'][$pos[0]];
+	$h1 = intval(substr($pos[0],0,1));
+	$v1 = intval(substr($pos[0],1,1));
 	$vectrs = array(
 		1 => array(
 			1 => array(1,2,-9,11),
@@ -44,32 +47,34 @@ function posblmov($game, $fgr, $pos)
 			$p = $pos[0]+($o*$w);
 
 			if ($p<11 || $p>88) break;
-			$h = intval(substr($p,0,1));
-			if ($h<1 || $h>8) break;
-			$v = intval(substr($p,1,1));
-			if ($v<1 || $v>8) break;
+			$h2 = intval(substr($p,0,1));
+			if ($h2<1 || $h2>8) break;
+			$v2 = intval(substr($p,1,1));
+			if ($v2<1 || $v2>8) break;
 
 			$posfgr = $game['postn'][$p];
 
 			if (in_array($fgr[1],array(3,4,5,8,9))) {
-				if ($posfgr[0] == $game['side']) break;
+				if ($posfgr[0] == $side) break;
 			}
 			if ($fgr[1] == 1) {
 				if ($abs_w == 1) {
 					if ($posfgr[1]) break;
 				} elseif ($abs_w == 2) {
 					if ($posfgr[1]) break;
-					if ($fgr[0] == 1 && $v != 4) break;
-					if ($fgr[0] == 2 && $v != 5) break;
+					if ($fgr[0] == 1 && $v2 != 4) break;
+					if ($fgr[0] == 2 && $v2 != 5) break;
 					$p_1 = $p+($w/2*(-1));
 					if ($game['postn'][$p_1][1]) break;
 				} else {
-					if ($posfgr[0] == $game['side']) break;
+					if ( ! $posfgr[1] || $posfgr[0] == $side) break;
 					//TODO взятие пешки на проходе
 				}
 			}
 
 			$posbl[] = $p;
+
+			if ($pos[1] && $pos[1] == $p) break 2;
 
 			if (in_array($fgr[1],array(4,5,8))) {
 				if ($posfgr[1]) break;
@@ -78,7 +83,21 @@ function posblmov($game, $fgr, $pos)
 			if (in_array($fgr[1],array(1,3,9))) break;
 		}
 	}
-	//TODO добавить ходы типа рокировки
+	if ($fgr[1] == 9 && ! $fgr['mvscnt']) {
+		foreach (array(10,-10) AS $w) {
+			$rok = true;
+			for ($o=1; $o<=8; $o++) {
+				$p = $pos[0]+($o*$w);
+				if ($p<11 || $p>88) break;
+				$posfgr = $game['postn'][$p];
+				if ( ! $posfgr[1]) continue;
+				if ($posfgr[0] != $side || $posfgr[1] != 5) break;
+				if ($posfgr['mvscnt']) break;
+				$posbl[] = $p;
+				if ($pos[1] && $pos[1] == $p) break 2;
+			}
+		}
+	}
 	if ($pos[1]) return in_array($pos[1],$posbl);
 	return $posbl;
 }

@@ -14,12 +14,13 @@ if ('step' == $a) {
 	$posf = intval($_GET['pf']);
 	$post = intval($_GET['pt']);
 
-	$fgr = $game['postn'][$posf] ? $game['postn'][$posf] : array(0,0);
-	if ( ! $fgr) exit('{"res":"er"}');
+	if (
+		! $game['postn'][$posf]
+		|| ! $game['postn'][$posf][0]
+		|| $game['postn'][$posf][0] != $game['side']
+	) exit('{"res":"er"}');
 	
-	if ($game['side'] != $fgr[0]) exit('{"res":"er"}');
-	
-	$posbl = posblmov($game,$fgr,array($posf,$post));
+	$posbl = posblmov($game,$game['side'],array($posf,$post));
 
 	var_dump($posbl);
 	print_r($posbl);
