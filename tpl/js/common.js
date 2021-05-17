@@ -71,6 +71,7 @@ $(document).ready(function(){
 			)
 		) {
 			cb.addClass('pr');
+			fgr.addClass('sel');
 			var posf = cb.data('posf');
 			var post = pxy;
 			$.ajax({
@@ -78,7 +79,7 @@ $(document).ready(function(){
 				dataType: 'JSON',
 			}).done(function(data){
 				if (data.res == 'ok') {
-					console.log('+');
+					board_set(data.prms);
 				} else {
 					var n = $('.ntcwrp');
 					n.removeClass('ok er').addClass(data.res);
@@ -95,5 +96,10 @@ $(document).ready(function(){
 	});
 
 });
+
+function board_set(prms)
+{
+	console.log(prms);
+}
 
 })(jQuery);

@@ -54,12 +54,17 @@ function posblmov($game, $side, $pos)
 
 			$posfgr = $game['postn'][$p];
 
+			$steptype = 1;
+
 			if (in_array($fgr[1],array(3,4,5,8,9))) {
 				if ($posfgr[0] == $side) break;
+				if ($posfgr[1]) $steptype = 2;
 			}
+
 			if ($fgr[1] == 1) {
 				if ($abs_w == 1) {
 					if ($posfgr[1]) break;
+					if ($v2 == 1 || $v2 == 8) $steptype = 4;
 				} elseif ($abs_w == 2) {
 					if ($posfgr[1]) break;
 					if ($fgr[0] == 1 && $v2 != 4) break;
@@ -68,13 +73,12 @@ function posblmov($game, $side, $pos)
 					if ($game['postn'][$p_1][1]) break;
 				} else {
 					if ( ! $posfgr[1] || $posfgr[0] == $side) break;
+					$steptype = 2;
 					//TODO взятие пешки на проходе
 				}
 			}
 
-			$posbl[] = $p;
-
-			if ($pos[1] && $pos[1] == $p) break 2;
+			$posbl[$p] = array($p,$steptype);
 
 			if (in_array($fgr[1],array(4,5,8))) {
 				if ($posfgr[1]) break;
@@ -93,11 +97,10 @@ function posblmov($game, $side, $pos)
 				if ( ! $posfgr[1]) continue;
 				if ($posfgr[0] != $side || $posfgr[1] != 5) break;
 				if ($posfgr['mvscnt']) break;
-				$posbl[] = $p;
-				if ($pos[1] && $pos[1] == $p) break 2;
+				$steptype = 3;
+				$posbl[$p] = array($p,$steptype);
 			}
 		}
 	}
-	if ($pos[1]) return in_array($pos[1],$posbl);
 	return $posbl;
 }

@@ -14,6 +14,8 @@ if ('step' == $a) {
 	$posf = intval($_GET['pf']);
 	$post = intval($_GET['pt']);
 
+	$res = array();
+
 	if (
 		! $game['postn'][$posf]
 		|| ! $game['postn'][$posf][0]
@@ -21,11 +23,37 @@ if ('step' == $a) {
 	) exit('{"res":"er"}');
 	
 	$posbl = posblmov($game,$game['side'],array($posf,$post));
+	$pos = $posbl[$post];
+	if ($pos[0] != $post) exit('{"res":"er"}');
 
-	var_dump($posbl);
-	print_r($posbl);
+	if ($pos[1] == 2) {
+		$game['hits'][] = $game['postn'][$post];
+	}
 
-	exit();
+	$game['postn'][$post] = $game['postn'][$posf];
+	unset($game['postn'][$posf]);
+	$game['postn'][$post]['mvscnt']++;
+
+	$res = array(
+		'res' => 'ok',
+		'acts' => array(),
+	);
+	$res['acts'][] = array(
+		'act' => 'last',
+		'posf' => $posf,
+		'post' => $post,
+	);
+	$res['acts'][] = array(
+		'pos' => $posf,
+		'act' => 'rem',
+	);
+	$res['acts'][] = array(
+		'pos' => $post,
+		'act' => 'set',
+		'fgr' => $game['postn'][$post],
+	);
+	$res = json_encode($res);
+	exit($res);
 }
 
 if ('game' == $a) {
