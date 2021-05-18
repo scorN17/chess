@@ -76,14 +76,10 @@
 
 .chessboardwrp {
   margin-top: 50px;
+  opacity: .05;
 }
 
 .chessboard {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   width: 560px;
   height: 560px;
   -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
@@ -98,96 +94,46 @@
   opacity: .5;
 }
 
-.chessboard .field {
+.chessboard .cells {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+
+.chessboard .cell {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 70px;
           flex: 0 0 70px;
-  position: relative;
   width: 70px;
   height: 70px;
+  position: relative;
 }
 
-.chessboard .field.clr_1 {
+.chessboard .cell.clr_1 {
   background: #f9f8ff;
 }
 
-.chessboard .field.clr_0 {
+.chessboard .cell.clr_0 {
   background: #9794bd;
 }
 
-.chessboard .field .figure {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  bottom: 3px;
-  right: 3px;
-  cursor: pointer;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 95%;
-}
-
-.chessboard .field .figure:hover, .chessboard .field .figure.sel {
+.chessboard .cell:hover, .chessboard .cell.sel {
   background-color: rgba(215, 127, 255, 0.5);
 }
 
-.chessboard .field .figure.fgr_19 {
-  background-image: url("../img/fig/wk.png");
-}
-
-.chessboard .field .figure.fgr_18 {
-  background-image: url("../img/fig/wq.png");
-}
-
-.chessboard .field .figure.fgr_14 {
-  background-image: url("../img/fig/wb.png");
-}
-
-.chessboard .field .figure.fgr_13 {
-  background-image: url("../img/fig/wn.png");
-}
-
-.chessboard .field .figure.fgr_15 {
-  background-image: url("../img/fig/wr.png");
-}
-
-.chessboard .field .figure.fgr_11 {
-  background-image: url("../img/fig/wp.png");
-}
-
-.chessboard .field .figure.fgr_29 {
-  background-image: url("../img/fig/bk.png");
-}
-
-.chessboard .field .figure.fgr_28 {
-  background-image: url("../img/fig/bq.png");
-}
-
-.chessboard .field .figure.fgr_24 {
-  background-image: url("../img/fig/bb.png");
-}
-
-.chessboard .field .figure.fgr_23 {
-  background-image: url("../img/fig/bn.png");
-}
-
-.chessboard .field .figure.fgr_25 {
-  background-image: url("../img/fig/br.png");
-}
-
-.chessboard .field .figure.fgr_21 {
-  background-image: url("../img/fig/bp.png");
-}
-
-.chessboard .field .vv,
-.chessboard .field .hh {
+.chessboard .cell .vv,
+.chessboard .cell .hh {
   text-align: center;
   position: absolute;
   color: #4a467e;
   font-family: "Intro";
 }
 
-.chessboard .field .vv {
+.chessboard .cell .vv {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -199,27 +145,100 @@
   bottom: 0;
 }
 
-.chessboard .field .hh {
+.chessboard .cell .hh {
   left: 0;
   right: 0;
   bottom: -25px;
 }
 
-.chessboard .field .vv2,
-.chessboard .field .hh2 {
+.chessboard .cell .vv2,
+.chessboard .cell .hh2 {
   opacity: 0;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
 
-.chessboard .field .vv2 {
+.chessboard .cell .vv2 {
   left: auto;
   right: -20px;
 }
 
-.chessboard .field .hh2 {
+.chessboard .cell .hh2 {
   bottom: auto;
   top: -25px;
+}
+
+.chessboard .figures {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.chessboard .figure {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 95%;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.chessboard .figure.fgr_19 {
+  background-image: url("../img/fig/wk.png");
+}
+
+.chessboard .figure.fgr_18 {
+  background-image: url("../img/fig/wq.png");
+}
+
+.chessboard .figure.fgr_14 {
+  background-image: url("../img/fig/wb.png");
+}
+
+.chessboard .figure.fgr_13 {
+  background-image: url("../img/fig/wn.png");
+}
+
+.chessboard .figure.fgr_15 {
+  background-image: url("../img/fig/wr.png");
+}
+
+.chessboard .figure.fgr_11 {
+  background-image: url("../img/fig/wp.png");
+}
+
+.chessboard .figure.fgr_29 {
+  background-image: url("../img/fig/bk.png");
+}
+
+.chessboard .figure.fgr_28 {
+  background-image: url("../img/fig/bq.png");
+}
+
+.chessboard .figure.fgr_24 {
+  background-image: url("../img/fig/bb.png");
+}
+
+.chessboard .figure.fgr_23 {
+  background-image: url("../img/fig/bn.png");
+}
+
+.chessboard .figure.fgr_25 {
+  background-image: url("../img/fig/br.png");
+}
+
+.chessboard .figure.fgr_21 {
+  background-image: url("../img/fig/bp.png");
 }
 
 .chessboard.myblack {

@@ -65,6 +65,7 @@ if ($res && $db->num_rows($res)) {
 <?php
 $num = 0;
 $clr = true;
+$p = $w = '';
 for ($v=8; $v>=1; $v--) {
 	$clr = ! $clr;
 	for ($h=1; $h<=8; $h++) {
@@ -77,16 +78,21 @@ for ($v=8; $v>=1; $v--) {
 
 		$my = $game['side'] && $game['side']==$fgr[0] ? true : false;
 
-		$p .= '<div class="field clr_'.($clr?'1':'0').' pxy_'.$pxy.'" data-pxy="'.$pxy.'">';
-		$p .= '<div class="figure fgr_'.$fgr[0].$fgr[1].' '.($my?'my':'').'" data-fgrt="'.$fgr[1].'">&nbsp;</div>';
+		$left = ($h-1)*70;
+		$top = (8-$v)*70;
+
+		$p .= '<div class="cell clr_'.($clr?'1':'0').' pxy_'.$pxy.'" data-pxy="'.$pxy.'">';
 		if ($h == 1) $p .= '<span class="vv">'.$v.'</span>';
 		if ($h == 8) $p .= '<span class="vv vv2">'.$v.'</span>';
 		if ($v == 8) $p .= '<span class="hh hh2">'.$hh.'</span>';
 		if ($v == 1) $p .= '<span class="hh">'.$hh.'</span>';
 		$p .= '</div>';
+
+		if ($fgr[1]) $w .= '<div class="figure fgr_'.$fgr[0].$fgr[1].' '.($my?'my':'').' pxy_'.$pxy.'" data-pxy="'.$pxy.'" data-fgrt="'.$fgr[1].'" style="left:'.$left.'px;top:'.$top.'px;">&nbsp;</div>';
 	}
 }
-print $p;
+print '<div class="cells">'.$p.'</div>';
+print '<div class="figures">'.$w.'</div>';
 ?>
 	</div><!--chessboard-->
 

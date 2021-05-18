@@ -50,28 +50,31 @@ $(document).ready(function(){
 		});
 	});
 
-	$('.chessboard .field .figure').on('click',function(){
+	$('.chessboard .cells .cell').on('click',function(){
 		var cb = $('.chessboard');
 		if (cb.hasClass('pr')) return;
 
 		var body = $('body');
 		var gmid = body.data('gmid');
 
-		var fgr = $(this);
-		var fld = fgr.parents('.field');
-		var pxy = fld.data('pxy');
-		var fgrt = fgr.data('fgrt');
-		var my = fgr.hasClass('my') ? true : false;
+		var cll = $(this);
+		var pxy = cll.data('pxy');
+		var fgr = $('.chessboard .figures .figure.pxy_'+pxy);
+		var fgrt, my;
+		if (fgr.length) {
+			fgrt = fgr.data('fgrt');
+			my = fgr.hasClass('my') ? true : false;
+		}
 
 		if (
-			$('.chessboard .field .figure.sel').length
+			$('.chessboard .cells .cell.sel').length
 			&& (
 				! my
-				|| ($('.chessboard .field .figure.sel').data('fgrt')=='9' && fgrt=='5')
+				|| ($('.chessboard .cells .cell.sel').data('fgrt')=='9' && fgrt=='5')
 			)
 		) {
 			cb.addClass('pr');
-			fgr.addClass('sel');
+			cll.addClass('sel');
 			var posf = cb.data('posf');
 			var post = pxy;
 			$.ajax({
@@ -88,10 +91,10 @@ $(document).ready(function(){
 				cb.removeClass('pr');
 			});
 		} else {
-			$('.chessboard .field .figure.sel').removeClass('sel');
+			$('.chessboard .cells .cell.sel').removeClass('sel');
 			if ( ! my) return;
 			cb.data('posf',pxy);
-			fgr.addClass('sel');
+			cll.addClass('sel');
 		}
 	});
 

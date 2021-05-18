@@ -59,10 +59,9 @@
 
 .chessboardwrp
 	margin-top: 50px
+	opacity: .05
 
 .chessboard
-	display: flex
-	flex-wrap: wrap
 	width: $board_w
 	height: $board_w
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px
@@ -73,56 +72,26 @@
 		pointer-events: none
 		opacity: .5
 
-	.field
+	.cells
+		display: flex
+		flex-wrap: wrap
+		width: 100%
+		height: 100%
+
+	.cell
 		flex: 0 0 70px
-		position: relative
 		width: 70px
 		height: 70px
+		position: relative
 
 		&.clr_1
 			background: #f9f8ff
 		&.clr_0
 			background: $purp
 
-		.figure
-			position: absolute
-			top: 3px
-			left: 3px
-			bottom: 3px
-			right: 3px
-			cursor: pointer
-			background-position: center center
-			background-repeat: no-repeat
-			background-size: 95%
-
-			&:hover,
-			&.sel
-				background-color: rgba(215,127,255,.5)
-
-			&.fgr_19
-				background-image: url('../img/fig/wk.png')
-			&.fgr_18
-				background-image: url('../img/fig/wq.png')
-			&.fgr_14
-				background-image: url('../img/fig/wb.png')
-			&.fgr_13
-				background-image: url('../img/fig/wn.png')
-			&.fgr_15
-				background-image: url('../img/fig/wr.png')
-			&.fgr_11
-				background-image: url('../img/fig/wp.png')
-			&.fgr_29
-				background-image: url('../img/fig/bk.png')
-			&.fgr_28
-				background-image: url('../img/fig/bq.png')
-			&.fgr_24
-				background-image: url('../img/fig/bb.png')
-			&.fgr_23
-				background-image: url('../img/fig/bn.png')
-			&.fgr_25
-				background-image: url('../img/fig/br.png')
-			&.fgr_21
-				background-image: url('../img/fig/bp.png')
+		&:hover,
+		&.sel
+			background-color: rgba(215,127,255,.5)
 
 		.vv,
 		.hh
@@ -150,6 +119,50 @@
 		.hh2
 			bottom: auto
 			top: -25px
+
+	.figures
+		display: flex
+		flex-wrap: wrap
+		position: absolute
+		top: 0
+		bottom: 0
+		left: 0
+		right: 0
+		pointer-events: none
+
+	.figure
+		position: absolute
+		width: 70px
+		height: 70px
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 95%
+		transition: .5s
+
+		&.fgr_19
+			background-image: url('../img/fig/wk.png')
+		&.fgr_18
+			background-image: url('../img/fig/wq.png')
+		&.fgr_14
+			background-image: url('../img/fig/wb.png')
+		&.fgr_13
+			background-image: url('../img/fig/wn.png')
+		&.fgr_15
+			background-image: url('../img/fig/wr.png')
+		&.fgr_11
+			background-image: url('../img/fig/wp.png')
+		&.fgr_29
+			background-image: url('../img/fig/bk.png')
+		&.fgr_28
+			background-image: url('../img/fig/bq.png')
+		&.fgr_24
+			background-image: url('../img/fig/bb.png')
+		&.fgr_23
+			background-image: url('../img/fig/bn.png')
+		&.fgr_25
+			background-image: url('../img/fig/br.png')
+		&.fgr_21
+			background-image: url('../img/fig/bp.png')
 
 	&.myblack
 		transform: rotate(180deg)
