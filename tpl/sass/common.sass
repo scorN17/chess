@@ -59,7 +59,6 @@
 
 .chessboardwrp
 	margin-top: 50px
-	opacity: .05
 
 .chessboard
 	width: $board_w
@@ -70,7 +69,6 @@
 
 	&.pr
 		pointer-events: none
-		opacity: .5
 
 	.cells
 		display: flex
@@ -83,20 +81,34 @@
 		width: 70px
 		height: 70px
 		position: relative
+		cursor: default
+
+		.backgr
+			position: absolute
+			top: 2px
+			bottom: 2px
+			left: 2px
+			right: 2px
+			transition: .3s
 
 		&.clr_1
 			background: #f9f8ff
 		&.clr_0
 			background: $purp
 
+		&.lst
+			.backgr
+				background-color: rgba(#81e4ff,.5)
+
 		&:hover,
 		&.sel
-			background-color: rgba(215,127,255,.5)
+			.backgr
+				background-color: rgba(#da9bff,.5)
 
 		.vv,
 		.hh
-			text-align: center
 			position: absolute
+			text-align: center
 			color: $purp_d
 			font-family: $font3
 		.vv
@@ -137,7 +149,7 @@
 		background-position: center
 		background-repeat: no-repeat
 		background-size: 95%
-		transition: .5s
+		transition: .3s
 
 		&.fgr_19
 			background-image: url('../img/fig/wk.png')

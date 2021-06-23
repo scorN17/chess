@@ -27,31 +27,32 @@ if ('step' == $a) {
 	if ($pos[0] != $post) exit('{"res":"er"}');
 
 	if ($pos[1] == 2) {
-		$game['hits'][] = $game['postn'][$post];
+		// $game['hits'][] = $game['postn'][$post];
 	}
 
 	$game['postn'][$post] = $game['postn'][$posf];
 	unset($game['postn'][$posf]);
 	$game['postn'][$post]['mvscnt']++;
 
+	list($left,$top) = pxy_to_topleft($post);
+
 	$res = array(
 		'res' => 'ok',
-		'acts' => array(),
+		'chgs' => array(),
 	);
-	$res['acts'][] = array(
-		'act' => 'last',
+	$res['chgs'][] = array(
+		'act' => 'move',
 		'posf' => $posf,
 		'post' => $post,
+		'left' => $left,
+		'top' => $top,
 	);
-	$res['acts'][] = array(
-		'pos' => $posf,
-		'act' => 'rem',
-	);
-	$res['acts'][] = array(
-		'pos' => $post,
-		'act' => 'set',
-		'fgr' => $game['postn'][$post],
-	);
+	if ($pos[1] == 2) {
+		$res['chgs'][] = array(
+			'act' => 'hit',
+			'pxy' => $post,
+		);
+	}
 	$res = json_encode($res);
 	exit($res);
 }

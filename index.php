@@ -78,10 +78,9 @@ for ($v=8; $v>=1; $v--) {
 
 		$my = $game['side'] && $game['side']==$fgr[0] ? true : false;
 
-		$left = ($h-1)*70;
-		$top = (8-$v)*70;
+		list($left,$top) = pxy_to_topleft($pxy);
 
-		$p .= '<div class="cell clr_'.($clr?'1':'0').' pxy_'.$pxy.'" data-pxy="'.$pxy.'">';
+		$p .= '<div class="cell clr_'.($clr?'1':'0').' pxy_'.$pxy.'" data-pxy="'.$pxy.'"><div class="backgr">&nbsp;</div>';
 		if ($h == 1) $p .= '<span class="vv">'.$v.'</span>';
 		if ($h == 8) $p .= '<span class="vv vv2">'.$v.'</span>';
 		if ($v == 8) $p .= '<span class="hh hh2">'.$hh.'</span>';

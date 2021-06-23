@@ -22,6 +22,15 @@ function transf($num, $tof)
 	return $res;
 }
 
+function pxy_to_topleft($pxy)
+{
+	$h = substr($pxy,0,1);
+	$v = substr($pxy,1,1);
+	$left = ($h-1)*70;
+	$top = (8-$v)*70;
+	return array($left,$top);
+}
+
 function posblmov($game, $side, $pos)
 {
 	$fgr = $game['postn'][$pos[0]];

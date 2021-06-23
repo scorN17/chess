@@ -65,12 +65,11 @@ $(document).ready(function(){
 			fgrt = fgr.data('fgrt');
 			my = fgr.hasClass('my') ? true : false;
 		}
-
 		if (
 			$('.chessboard .cells .cell.sel').length
 			&& (
 				! my
-				|| ($('.chessboard .cells .cell.sel').data('fgrt')=='9' && fgrt=='5')
+				|| (cb.data('fgrt')=='9' && fgrt=='5')
 			)
 		) {
 			cb.addClass('pr');
@@ -82,8 +81,12 @@ $(document).ready(function(){
 				dataType: 'JSON',
 			}).done(function(data){
 				if (data.res == 'ok') {
-					board_set(data.prms);
+					$('.chessboard .cells .cell.lst').removeClass('lst');
+					$('.chessboard .cells .cell.sel').addClass('lst');
+					$('.chessboard .cells .cell.sel').removeClass('sel');
+					board_set(data.chgs);
 				} else {
+					$('.chessboard .cells .cell.sel').removeClass('sel');
 					var n = $('.ntcwrp');
 					n.removeClass('ok er').addClass(data.res);
 					if (data.txt) n.html(data.txt);
@@ -94,15 +97,24 @@ $(document).ready(function(){
 			$('.chessboard .cells .cell.sel').removeClass('sel');
 			if ( ! my) return;
 			cb.data('posf',pxy);
+			cb.data('fgrt',fgrt);
 			cll.addClass('sel');
 		}
 	});
 
 });
 
-function board_set(prms)
+function board_set(chgs)
 {
-	console.log(prms);
+	chgs.forEach(function(val,key){
+		if ('move' == val.act) {
+			console.log(val);
+			$('.chessboard .figures .figure.pxy_'+val.posf).css({
+				left: val.left,
+				top: val.top,
+			});
+		}
+	});
 }
 
 })(jQuery);

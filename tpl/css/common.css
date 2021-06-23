@@ -76,7 +76,6 @@
 
 .chessboardwrp {
   margin-top: 50px;
-  opacity: .05;
 }
 
 .chessboard {
@@ -91,7 +90,6 @@
 
 .chessboard.pr {
   pointer-events: none;
-  opacity: .5;
 }
 
 .chessboard .cells {
@@ -111,6 +109,17 @@
   width: 70px;
   height: 70px;
   position: relative;
+  cursor: default;
+}
+
+.chessboard .cell .backgr {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  -webkit-transition: .3s;
+  transition: .3s;
 }
 
 .chessboard .cell.clr_1 {
@@ -121,14 +130,18 @@
   background: #9794bd;
 }
 
-.chessboard .cell:hover, .chessboard .cell.sel {
-  background-color: rgba(215, 127, 255, 0.5);
+.chessboard .cell.lst .backgr {
+  background-color: rgba(129, 228, 255, 0.5);
+}
+
+.chessboard .cell:hover .backgr, .chessboard .cell.sel .backgr {
+  background-color: rgba(218, 155, 255, 0.5);
 }
 
 .chessboard .cell .vv,
 .chessboard .cell .hh {
-  text-align: center;
   position: absolute;
+  text-align: center;
   color: #4a467e;
   font-family: "Intro";
 }
@@ -189,8 +202,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 95%;
-  -webkit-transition: .5s;
-  transition: .5s;
+  -webkit-transition: .3s;
+  transition: .3s;
 }
 
 .chessboard .figure.fgr_19 {
